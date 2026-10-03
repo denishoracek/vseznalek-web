@@ -1,0 +1,2483 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Všeználek | Opravy, montáže, zahrada a stěhování</title>
+
+    <meta name="description"
+        content="Všeználek - šikovné ruce pro každou práci. Opravy, montáže, práce na zahradě a stěhování. Mladá Boleslav a okolí • Praha.">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='28' fill='%23f5a900'/%3E%3Ctext x='50' y='72' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-size='68' font-weight='900' fill='%23111827'%3EV%3C/text%3E%3C/svg%3E">
+
+    <style>
+        :root {
+            --yellow: #f5a900;
+            --yellow-light: #ffc43d;
+            --dark: #111827;
+            --dark-2: #1f2937;
+            --text: #172033;
+            --muted: #667085;
+            --light: #f7f8fa;
+            --white: #fff;
+            --border: #e5e7eb;
+            --radius: 22px;
+            --shadow: 0 15px 45px rgba(15, 23, 42, .10);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: auto;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, .96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            min-height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 900;
+        }
+
+        .logo-icon {
+            width: 46px;
+            height: 46px;
+            background: var(--yellow);
+            color: var(--dark);
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            font-size: 25px;
+            font-weight: 900;
+            transition: transform .25s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(-5deg) scale(1.04);
+        }
+
+        .logo-text strong {
+            display: block;
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .menu a {
+            transition: color .2s ease;
+        }
+
+        .menu a:hover {
+            color: var(--yellow);
+        }
+
+        .menu-contact {
+            background: var(--dark);
+            color: white !important;
+            padding: 12px 18px;
+            border-radius: 12px;
+            transition:
+                background-color .2s ease,
+                color .2s ease,
+                transform .2s ease;
+        }
+
+        .menu-contact:hover {
+            background: var(--yellow);
+            color: var(--dark) !important;
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        .mobile-menu {
+            display: none;
+            position: relative;
+        }
+
+        .mobile-menu summary {
+            list-style: none;
+            cursor: pointer;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            border-radius: 12px;
+        }
+
+        .mobile-menu summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .mobile-menu summary span {
+            width: 28px;
+            height: 3px;
+            background: var(--dark);
+            border-radius: 5px;
+            transition:
+                transform .28s cubic-bezier(.2, .8, .2, 1),
+                opacity .16s ease;
+            transform-origin: center;
+        }
+
+        .mobile-menu[open] summary span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .mobile-menu[open] summary span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .mobile-menu[open] summary span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .mobile-links {
+            position: fixed;
+            top: 78px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, .98);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, .08);
+            padding: 10px 20px 16px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translate3d(0, -8px, 0);
+            pointer-events: none;
+            transition:
+                opacity .18s ease-out,
+                transform .22s cubic-bezier(.2, .8, .2, 1),
+                visibility 0s linear .22s;
+        }
+
+        .mobile-menu[open] .mobile-links {
+            opacity: 1;
+            visibility: visible;
+            transform: translate3d(0, 0, 0);
+            pointer-events: auto;
+        }
+
+        .mobile-links a {
+            display: block;
+            padding: 13px 14px;
+            border-radius: 10px;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .mobile-links a:hover {
+            background: var(--light);
+            color: var(--yellow);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background:
+                radial-gradient(circle at 80% 20%,
+                    rgba(245, 169, 0, .25),
+                    transparent 35%),
+                linear-gradient(120deg,
+                    var(--dark),
+                    var(--dark-2));
+            color: white;
+        }
+
+        .hero-content {
+            min-height: 690px;
+            display: grid;
+            grid-template-columns: 1fr .9fr;
+            align-items: center;
+            gap: 70px;
+            padding: 80px 0;
+        }
+
+        .eyebrow {
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 6vw, 76px);
+            line-height: 1.02;
+            letter-spacing: -3px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: var(--yellow-light);
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: #d8dee8;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 52px;
+            padding: 0 23px;
+            border-radius: 13px;
+            font-weight: 900;
+            transition:
+                transform .2s ease,
+                background-color .2s ease,
+                color .2s ease;
+        }
+
+        .button-yellow {
+            background: var(--yellow);
+            color: var(--dark);
+        }
+
+        .button-yellow:hover {
+            background: var(--yellow-light);
+            transform: translateY(-2px);
+        }
+
+        .button-white {
+            background: white;
+            color: var(--dark);
+        }
+
+        .button-white:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-points {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin-top: 27px;
+            color: #d5dbe5;
+            font-size: 13px;
+        }
+
+        .svg-icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+            flex-shrink: 0;
+        }
+
+
+        /* =========================
+           HERO FOTO
+        ========================= */
+
+        .hero-photo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-placeholder small {
+            display: block;
+            width: 100%;
+        }
+
+        .photo-placeholder img {
+            display: block;
+            width: 100%;
+            max-width: 520px;
+            height: auto;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+
+
+        /* =========================
+           SEKCE
+        ========================= */
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .section-title h2,
+        .gallery-heading h2 {
+            font-size: clamp(34px, 4vw, 50px);
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        .section-title p,
+        .gallery-heading p {
+            color: var(--muted);
+        }
+
+
+        /* =========================
+           SLUŽBY
+        ========================= */
+
+        .services {
+            background: var(--light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .service {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .service:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow);
+        }
+
+        .service-icon {
+            font-size: 35px;
+            margin-bottom: 22px;
+        }
+
+        .service h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .service p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================
+           O NÁS
+        ========================= */
+
+        .about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-photo {
+            height: 540px;
+            background: #e8edf2;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 18px 45px rgba(15, 23, 42, .10);
+        }
+
+        .about-photo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transition: transform .4s ease;
+        }
+
+        .about-photo:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-text h2,
+        .contact h2 {
+            font-size: clamp(35px, 4vw, 52px);
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 22px;
+        }
+
+        .about-text p {
+            color: var(--muted);
+            margin-bottom: 15px;
+        }
+
+        .about-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .info-box {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 18px;
+            border-radius: 16px;
+            font-size: 13px;
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, .07);
+        }
+
+        .info-box .emoji {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+
+        /* =========================
+           GALERIE
+        ========================= */
+
+        .gallery {
+            background: var(--light);
+        }
+
+        .gallery-heading {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 45px;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .before-after-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            padding: 14px;
+            overflow: hidden;
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .before-after-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .ba-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .ba-photo {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            border-radius: 17px;
+            background: #e5e7eb;
+            cursor: zoom-in;
+            outline: none;
+        }
+
+        .ba-photo img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+            transition: transform .45s ease;
+        }
+
+        .ba-photo:hover img {
+            transform: scale(1.06);
+        }
+
+        .ba-photo:focus-visible {
+            box-shadow: 0 0 0 4px var(--yellow);
+        }
+
+        .ba-label {
+            position: absolute;
+            top: 11px;
+            left: 11px;
+            padding: 6px 11px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            pointer-events: none;
+        }
+
+        .ba-label.before {
+            background: rgba(17, 24, 39, .9);
+            color: white;
+        }
+
+        .ba-label.after {
+            background: rgba(245, 169, 0, .95);
+            color: var(--dark);
+        }
+
+        .more-photos {
+            text-align: center;
+            margin: 42px auto 0;
+            max-width: 620px;
+            padding: 26px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, .06);
+        }
+
+        .more-photos p {
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .more-photos .button {
+            background: var(--dark);
+            color: white;
+        }
+
+        .more-photos .button:hover {
+            background: var(--yellow);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           FACEBOOK IKONKA
+        ========================= */
+
+        .facebook-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .facebook-icon {
+            width: 27px;
+            height: 27px;
+            border-radius: 7px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #6b7280;
+            color: white;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 1;
+
+            padding-top: 2px;
+            box-sizing: border-box;
+
+            flex-shrink: 0;
+
+            box-shadow: 0 3px 8px rgba(15, 23, 42, .18);
+
+            opacity: 1;
+            visibility: visible;
+
+            transition:
+                transform .2s ease,
+                background-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .facebook-button:hover .facebook-icon {
+            background: #4b5563;
+            color: white;
+            transform: scale(1.08);
+            box-shadow: 0 5px 12px rgba(15, 23, 42, .25);
+        }
+
+
+        /* =========================
+           LIGHTBOX
+        ========================= */
+
+        .gallery-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            background: rgba(11, 18, 32, .94);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition:
+                opacity .25s ease,
+                visibility .25s ease;
+        }
+
+        .gallery-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .lightbox-content {
+            max-width: min(1100px, 86vw);
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: scale(.94);
+            transition: transform .3s ease;
+        }
+
+        .gallery-lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-content img {
+            display: block;
+            max-width: 100%;
+            max-height: 78vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+        }
+
+        .lightbox-caption {
+            margin-top: 14px;
+            color: white;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .lightbox-close,
+        .lightbox-prev,
+        .lightbox-next {
+            position: fixed;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            width: 56px;
+            height: 56px;
+            padding: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, .12);
+            color: white;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, .25),
+                inset 0 0 0 1px rgba(255, 255, 255, .15);
+            transition:
+                background .2s ease,
+                color .2s ease,
+                transform .2s ease,
+                box-shadow .2s ease;
+            z-index: 20;
+        }
+
+        .lightbox-close {
+            top: 22px;
+            right: 22px;
+            font-size: 31px;
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .lightbox-close:hover {
+            background: var(--yellow);
+            color: var(--dark);
+            transform: scale(1.08);
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-prev {
+            left: 28px;
+        }
+
+        .lightbox-next {
+            right: 28px;
+        }
+
+        .lightbox-prev::before {
+            content: "";
+            width: 13px;
+            height: 13px;
+            border-left: 3px solid currentColor;
+            border-bottom: 3px solid currentColor;
+            transform: rotate(45deg);
+            position: absolute;
+            left: 22px;
+            top: 20px;
+        }
+
+        .lightbox-next::before {
+            content: "";
+            width: 13px;
+            height: 13px;
+            border-right: 3px solid currentColor;
+            border-top: 3px solid currentColor;
+            transform: rotate(45deg);
+            position: absolute;
+            left: 18px;
+            top: 20px;
+        }
+
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: var(--yellow);
+            color: var(--dark);
+            box-shadow:
+                0 10px 35px rgba(0, 0, 0, .35),
+                0 0 0 1px rgba(245, 169, 0, .2);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .lightbox-prev:active,
+        .lightbox-next:active {
+            transform: translateY(-50%) scale(.96);
+        }
+
+
+        /* =========================
+           LOKALITA
+        ========================= */
+
+        .location {
+            background: var(--yellow);
+        }
+
+        .location-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .location h2 {
+            font-size: clamp(34px, 4vw, 50px);
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        .location p {
+            max-width: 700px;
+            color: #704500;
+        }
+
+        .button-dark {
+            background: var(--dark);
+            color: white;
+            white-space: nowrap;
+        }
+
+
+        /* =========================
+           KONTAKT
+        ========================= */
+
+        .contact {
+            background: white;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 80px;
+        }
+
+        .contact h2 {
+            margin-bottom: 15px;
+        }
+
+        .contact-intro {
+            color: var(--muted);
+            margin-bottom: 30px;
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .contact-card {
+            border: 1px solid var(--border);
+            border-radius: 19px;
+            padding: 22px;
+            background: white;
+            transition:
+                transform .2s ease,
+                border-color .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--yellow);
+            box-shadow: 0 14px 30px rgba(15, 23, 42, .08);
+        }
+
+        .contact-card .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            display: grid;
+            place-items: center;
+            background: var(--light);
+            color: var(--dark);
+            margin-bottom: 16px;
+            transition:
+                background .2s ease,
+                color .2s ease,
+                transform .2s ease;
+        }
+
+        .contact-card .icon svg {
+            width: 24px;
+            height: 24px;
+            display: block;
+        }
+
+        .contact-card:hover .icon {
+            background: var(--yellow);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .contact-card small {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 3px;
+        }
+
+        .contact-card strong {
+            display: block;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        .contact-side {
+            background: var(--dark);
+            color: white;
+            border-radius: 25px;
+            padding: 35px;
+        }
+
+        .contact-side h3 {
+            font-size: 25px;
+            margin-bottom: 20px;
+        }
+
+        .contact-side ul {
+            padding-left: 20px;
+            color: #d1d8e3;
+            margin-bottom: 25px;
+        }
+
+        .contact-side li {
+            margin: 8px 0;
+        }
+
+        .contact-side .button {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #0b1220;
+            color: #cbd5e1;
+            padding: 45px 0 20px;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-logo {
+            color: white;
+            font-size: 22px;
+            font-weight: 900;
+        }
+
+        .footer-text {
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 22px;
+            font-size: 13px;
+        }
+
+        .footer-links a {
+            transition: color .2s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            margin-top: 30px;
+            padding-top: 18px;
+            color: #718096;
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           TABLET
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-content,
+            .about-grid,
+            .contact-grid {
+                gap: 40px;
+            }
+
+        }
+
+
+        /* =========================
+           MOBIL
+        ========================= */
+
+        @media (max-width: 720px) {
+
+            .container {
+                width: calc(100% - 28px);
+            }
+
+            .menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                padding: 45px 0 70px;
+            }
+
+            .hero-photo {
+                order: -1;
+            }
+
+            .photo-placeholder img {
+                width: 90%;
+                max-width: 420px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .buttons .button {
+                width: 100%;
+            }
+
+            .hero-points {
+                justify-content: center;
+                text-align: center;
+                gap: 10px 18px;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+
+            .services-grid,
+            .about-grid,
+            .contact-grid,
+            .contact-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .about-photo {
+                height: 380px;
+            }
+
+            .about-info {
+                grid-template-columns: 1fr;
+            }
+
+            .before-after-grid {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .before-after-card {
+                padding: 10px;
+                border-radius: 22px;
+            }
+
+            .ba-images {
+                grid-template-columns: 1fr;
+            }
+
+            .ba-photo {
+                aspect-ratio: 16 / 10;
+            }
+
+            .more-photos {
+                padding: 22px 16px;
+            }
+
+            .gallery-lightbox {
+                padding: 20px;
+            }
+
+            .lightbox-content {
+                max-width: 92vw;
+            }
+
+            .lightbox-content img {
+                max-height: 72vh;
+                border-radius: 14px;
+            }
+
+            .lightbox-close {
+                top: 15px;
+                right: 15px;
+                width: 44px;
+                height: 44px;
+                font-size: 28px;
+            }
+
+            .lightbox-prev,
+            .lightbox-next {
+                width: 46px;
+                height: 46px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .lightbox-prev {
+                left: 8px;
+            }
+
+            .lightbox-next {
+                right: 8px;
+            }
+
+            .lightbox-prev::before {
+                width: 11px;
+                height: 11px;
+                border-width: 2.5px;
+                left: 19px;
+                top: 17px;
+            }
+
+            .lightbox-next::before {
+                width: 11px;
+                height: 11px;
+                border-width: 2.5px;
+                left: 15px;
+                top: 17px;
+            }
+
+            .location-box {
+                display: block;
+            }
+
+            .location .button {
+                margin-top: 25px;
+            }
+
+            .footer-top {
+                display: block;
+            }
+
+            .footer-links {
+                margin-top: 25px;
+            }
+
+        }
+
+
+        /* =========================
+           MALÝ TELEFON
+        ========================= */
+
+        @media (max-width: 430px) {
+
+            .logo-text span {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .photo-placeholder img {
+                width: 95%;
+            }
+
+            .hero-points {
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap: 7px;
+            }
+
+            .hero-points span {
+                width: 100%;
+                text-align: center;
+            }
+
+            .lightbox-prev {
+                left: 5px;
+            }
+
+            .lightbox-next {
+                right: 5px;
+            }
+
+            .lightbox-prev,
+            .lightbox-next {
+                width: 42px;
+                height: 42px;
+            }
+
+            .lightbox-prev::before {
+                width: 10px;
+                height: 10px;
+                left: 17px;
+                top: 15px;
+            }
+
+            .lightbox-next::before {
+                width: 10px;
+                height: 10px;
+                left: 14px;
+                top: 15px;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+
+        <div class="container nav">
+
+            <a href="#domu" class="logo">
+
+                <div class="logo-icon">
+                    V
+                </div>
+
+                <div class="logo-text">
+
+                    <strong>
+                        Všeználek
+                    </strong>
+
+                    <span>
+                        Šikovné ruce pro každou práci
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="menu">
+
+                <a href="#sluzby">Služby</a>
+                <a href="#o-nas">O Všeználkovi</a>
+                <a href="#fotky">Fotky</a>
+                <a href="#lokalita">Kde působím</a>
+
+                <a href="#kontakt" class="menu-contact">
+                    Kontakt
+                </a>
+
+            </nav>
+
+
+            <details class="mobile-menu" id="mobileMenu">
+
+                <summary aria-label="Otevřít menu">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </summary>
+
+
+                <nav class="mobile-links">
+
+                    <a href="#sluzby">Služby</a>
+                    <a href="#o-nas">O Všeználkovi</a>
+                    <a href="#fotky">Fotky</a>
+                    <a href="#lokalita">Kde působím</a>
+                    <a href="#kontakt">Kontakt</a>
+
+                </nav>
+
+            </details>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="hero" id="domu">
+
+            <div class="container hero-content">
+
+                <div>
+
+                    <div class="eyebrow">
+                        Mladá Boleslav a okolí • Praha
+                    </div>
+
+                    <h1>
+                        Šikovné ruce
+                        <br>
+                        <span>
+                            pro každou práci.
+                        </span>
+                    </h1>
+
+                    <p>
+                        Všeználek – šikovný pomocník
+                        na opravy, montáže, práce na
+                        zahradě a stěhování.
+
+                        Když něco potřebujete zvládnout,
+                        ozvěte se.
+                    </p>
+
+
+                    <div class="buttons">
+
+                        <a href="tel:+420704890064" class="button button-yellow">
+
+                            <svg class="svg-icon" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                                19.79 19.79 0 0 1-8.63-3.07
+                                19.5 19.5 0 0 1-6-6
+                                19.79 19.79 0 0 1-3.07-8.67
+                                A2 2 0 0 1 4.11 2h3
+                                a2 2 0 0 1 2 1.72
+                                12.84 12.84 0 0 0 .7 2.81
+                                2 2 0 0 1-.45 2.11L8.09 9.91
+                                a16 16 0 0 0 6 6l1.27-1.27
+                                a2 2 0 0 1 2.11-.45
+                                12.84 12.84 0 0 0 2.81.7
+                                A2 2 0 0 1 22 16.92z" />
+
+                            </svg>
+
+                            Zavolat
+
+                        </a>
+
+
+                        <a href="#sluzby" class="button button-white">
+                            Prohlédnout služby
+                        </a>
+
+                    </div>
+
+
+                    <div class="hero-points">
+
+                        <span>✓ Opravy</span>
+                        <span>✓ Montáže</span>
+                        <span>✓ Zahrada</span>
+                        <span>✓ Stěhování</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-photo">
+
+                    <div class="photo-placeholder">
+
+                        <small>
+
+                            <img src="img/foto1.png"
+                                alt="Všeználek - šikovné ruce pro každou práci">
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="services" id="sluzby">
+
+            <div class="container">
+
+                <div class="section-title">
+
+                    <div class="eyebrow">
+                        Co Všeználek nabízí
+                    </div>
+
+                    <h2>
+                        Služby pro dům,
+                        zahradu i stěhování
+                    </h2>
+
+                    <p>
+                        Praktická pomoc podle toho,
+                        co právě potřebujete.
+                    </p>
+
+                </div>
+
+
+                <div class="services-grid">
+
+                    <article class="service">
+
+                        <div class="service-icon">
+                            🔧
+                        </div>
+
+                        <h3>Opravy</h3>
+
+                        <p>
+                            Drobné opravy a praktická
+                            pomoc v domácnosti,
+                            na chatě nebo kolem domu.
+                        </p>
+
+                    </article>
+
+
+                    <article class="service">
+
+                        <div class="service-icon">
+                            🪚
+                        </div>
+
+                        <h3>Montáže</h3>
+
+                        <p>
+                            Montáž a sestavení nábytku,
+                            vybavení a dalších věcí.
+                        </p>
+
+                    </article>
+
+
+                    <article class="service">
+
+                        <div class="service-icon">
+                            🌿
+                        </div>
+
+                        <h3>Zahrada</h3>
+
+                        <p>
+                            Pomoc s pracemi kolem domu,
+                            zahrady a pozemku.
+                        </p>
+
+                    </article>
+
+
+                    <article class="service">
+
+                        <div class="service-icon">
+                            📦
+                        </div>
+
+                        <h3>Stěhování</h3>
+
+                        <p>
+                            Pomoc se stěhováním,
+                            přenášením a dalšími úkoly.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="about" id="o-nas">
+
+            <div class="container about-grid">
+
+                <div class="about-photo">
+
+                    <img src="img/foto2.jpg"
+                        alt="Všeználek - šikovné ruce pro každou práci">
+
+                </div>
+
+
+                <div class="about-text">
+
+                    <div class="eyebrow">
+                        O Všeználkovi
+                    </div>
+
+                    <h2>
+                        Jeden člověk,
+                        spousta praktické pomoci.
+                    </h2>
+
+                    <p>
+                        Všeználek je praktický pomocník
+                        pro situace, kdy potřebujete něco
+                        opravit, namontovat, přestěhovat
+                        nebo zvládnout kolem domu
+                        a zahrady.
+                    </p>
+
+                    <p>
+                        Všeználek působí v oblasti
+                        <strong>Mladé Boleslavi a okolí</strong>
+                        a také v
+                        <strong>Praze</strong>.
+                    </p>
+
+
+                    <div class="about-info">
+
+                        <div class="info-box">
+
+                            <span class="emoji">
+                                👤
+                            </span>
+
+                            <strong>
+                                Štěpán Gütl
+                            </strong>
+
+                            <br>
+
+                            Všeználek
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <span class="emoji">
+                                📍
+                            </span>
+
+                            <strong>
+                                Mladá Boleslav
+                            </strong>
+
+                            <br>
+
+                            okolí + Praha
+
+                        </div>
+
+
+                        <a href="tel:+420704890064" class="info-box">
+
+                            <span class="emoji">
+                                📞
+                            </span>
+
+                            <strong>
+                                704 890 064
+                            </strong>
+
+                            <br>
+
+                            Zavolat nebo napsat
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="gallery" id="fotky">
+
+            <div class="container">
+
+                <div class="gallery-heading">
+
+                    <div class="eyebrow">
+                        Fotogalerie
+                    </div>
+
+                    <h2>
+                        Před a po
+                    </h2>
+
+                    <p>
+                        Podívejte se na rozdíl před
+                        začátkem práce a po dokončení.
+                    </p>
+
+                </div>
+
+
+                <div class="before-after-grid" id="galleryGrid">
+                </div>
+
+
+                <div class="more-photos">
+
+                    <p>
+                        Další realizace najdete také na Facebooku.
+                    </p>
+
+
+                    <a href="https://www.facebook.com/profile.php?id=61587657370384"
+                        target="_blank"
+                        rel="noopener"
+                        class="button facebook-button">
+
+                        <span class="facebook-icon" aria-hidden="true">f</span>
+
+                        <span>
+                            Zobrazit více fotek
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="location" id="lokalita">
+
+            <div class="container">
+
+                <div class="location-box">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            Kde Všeználek působí
+                        </div>
+
+                        <h2>
+                            Mladá Boleslav,
+                            okolí a Praha
+                        </h2>
+
+                        <p>
+                            Potřebujete pomoc v Mladé Boleslavi,
+                            okolí nebo v Praze?
+                            Napište nebo zavolejte.
+                        </p>
+
+                    </div>
+
+
+                    <a href="#kontakt" class="button button-dark">
+                        Nezávazně poptat
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="contact" id="kontakt">
+
+            <div class="container contact-grid">
+
+                <div>
+
+                    <div class="eyebrow">
+                        Kontakt
+                    </div>
+
+                    <h2>
+                        Řekněte,
+                        co potřebujete.
+                    </h2>
+
+                    <p class="contact-intro">
+                        Nejrychlejší je zavolat.
+                        Pokud se vám to nehodí,
+                        můžete napsat e-mail.
+                    </p>
+
+
+                    <div class="contact-cards">
+
+                        <a href="tel:+420704890064" class="contact-card">
+
+                            <div class="icon">
+
+                                <svg viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
+
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                                    19.79 19.79 0 0 1-8.63-3.07
+                                    19.5 19.5 0 0 1-6-6
+                                    19.79 19.79 0 0 1-3.07-8.67
+                                    A2 2 0 0 1 4.11 2h3
+                                    a2 2 0 0 1 2 1.72
+                                    12.84 12.84 0 0 0 .7 2.81
+                                    2 2 0 0 1-.45 2.11L8.09 9.91
+                                    a16 16 0 0 0 6 6l1.27-1.27
+                                    a2 2 0 0 1 2.11-.45
+                                    12.84 12.84 0 0 0 2.81.7
+                                    A2 2 0 0 1 22 16.92z" />
+
+                                </svg>
+
+                            </div>
+
+                            <small>
+                                Telefon
+                            </small>
+
+                            <strong>
+                                704 890 064
+                            </strong>
+
+                        </a>
+
+
+                        <a href="mailto:stepangutl@seznam.cz"
+                            class="contact-card">
+
+                            <div class="icon">
+
+                                <svg viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
+
+                                    <rect x="3" y="5"
+                                        width="18" height="14" rx="2" />
+
+                                    <path d="m4 7 8 6 8-6" />
+
+                                </svg>
+
+                            </div>
+
+                            <small>
+                                E-mail
+                            </small>
+
+                            <strong>
+                                stepangutl@seznam.cz
+                            </strong>
+
+                        </a>
+
+
+                        <a href="https://www.facebook.com/profile.php?id=61587657370384"
+                            target="_blank"
+                            rel="noopener"
+                            class="contact-card">
+
+                            <div class="icon">
+
+                                <svg viewBox="0 0 24 24"
+                                    fill="currentColor">
+
+                                    <path d="M14 8h3V4.5
+                                    c-.5-.1-1.8-.2-3.3-.2
+                                    -3.3 0-5.6 2-5.6 5.7V13H5v4h3.1v7h4.2v-7h3.5l.6-4h-4.1v-2.5
+                                    c0-1.2.3-2 1.7-2z" />
+
+                                </svg>
+
+                            </div>
+
+                            <small>
+                                Facebook
+                            </small>
+
+                            <strong>
+                                Všeználek
+                            </strong>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="contact-side">
+
+                    <h3>
+                        Co napsat do poptávky?
+                    </h3>
+
+                    <ul>
+
+                        <li>
+                            Co potřebujete udělat
+                        </li>
+
+                        <li>
+                            Kde se práce nachází
+                        </li>
+
+                        <li>
+                            Přibližný rozsah práce
+                        </li>
+
+                        <li>
+                            Případně přiložte fotku
+                        </li>
+
+                    </ul>
+
+
+                    <a href="mailto:stepangutl@seznam.cz?subject=Poptávka služeb Všeználek"
+                        class="button button-yellow">
+
+                        <svg class="svg-icon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+
+                            <rect x="3" y="5"
+                                width="18" height="14" rx="2" />
+
+                            <path d="m4 7 8 6 8-6" />
+
+                        </svg>
+
+                        Napsat e-mail
+
+                    </a>
+
+
+                    <a href="tel:+420704890064"
+                        class="button button-white">
+
+                        <svg class="svg-icon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2
+                            19.79 19.79 0 0 1-8.63-3.07
+                            19.5 19.5 0 0 1-6-6
+                            19.79 19.79 0 0 1-3.07-8.67
+                            A2 2 0 0 1 4.11 2h3
+                            a2 2 0 0 1 2 1.72
+                            12.84 12.84 0 0 0 .7 2.81
+                            2 2 0 0 1-.45 2.11L8.09 9.91
+                            a16 16 0 0 0 6 6l1.27-1.27
+                            a2 2 0 0 1 2.11-.45
+                            12.84 12.84 0 0 0 2.81.7
+                            A2 2 0 0 1 22 16.92z" />
+
+                        </svg>
+
+                        Zavolat
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-top">
+
+                <div>
+
+                    <div class="footer-logo">
+                        Všeználek
+                    </div>
+
+                    <div class="footer-text">
+                        Šikovné ruce pro každou práci.
+                    </div>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <a href="#sluzby">
+                        Služby
+                    </a>
+
+                    <a href="#o-nas">
+                        O Všeználkovi
+                    </a>
+
+                    <a href="#fotky">
+                        Fotky
+                    </a>
+
+                    <a href="#kontakt">
+                        Kontakt
+                    </a>
+
+                    <a href="https://www.facebook.com/profile.php?id=61587657370384"
+                        target="_blank"
+                        rel="noopener">
+                        Facebook
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="copyright">
+                © 2026 Všeználek.
+                Všechna práva vyhrazena.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <div class="gallery-lightbox"
+        id="galleryLightbox"
+        aria-hidden="true">
+
+
+        <button class="lightbox-close"
+            type="button"
+            aria-label="Zavřít galerii">
+            ×
+        </button>
+
+
+        <button class="lightbox-prev"
+            type="button"
+            aria-label="Předchozí fotografie">
+        </button>
+
+
+        <div class="lightbox-content">
+
+            <img id="lightboxImage"
+                src=""
+                alt="">
+
+
+            <div class="lightbox-caption"
+                id="lightboxCaption">
+            </div>
+
+        </div>
+
+
+        <button class="lightbox-next"
+            type="button"
+            aria-label="Další fotografie">
+        </button>
+
+    </div>
+
+
+    <script>
+
+        const galleryItems = [
+
+            ["foto3.jpg", "foto4.jpg"],
+            ["foto5.jpg", "foto6.jpg"],
+            ["foto7.jpg", "foto8.jpg"],
+            ["foto9.jpg", "foto10.jpg"]
+
+        ];
+
+
+        const galleryGrid =
+            document.getElementById("galleryGrid");
+
+
+        galleryItems.forEach((pair) => {
+
+            const card =
+                document.createElement("article");
+
+            card.className =
+                "before-after-card";
+
+
+            card.innerHTML = `
+
+                <div class="ba-images">
+
+                    <div
+                        class="ba-photo"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Zvětšit fotografii před prací">
+
+                        <img
+                            src="img/${pair[0]}"
+                            alt="Stav před prací"
+                            loading="lazy">
+
+                        <div class="ba-label before">
+                            PŘED
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="ba-photo"
+                        tabindex="0"
+                        role="button"
+                        aria-label="Zvětšit fotografii po práci">
+
+                        <img
+                            src="img/${pair[1]}"
+                            alt="Stav po práci"
+                            loading="lazy">
+
+                        <div class="ba-label after">
+                            PO
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            galleryGrid.appendChild(card);
+
+        });
+
+
+        const mobileMenu =
+            document.getElementById("mobileMenu");
+
+
+        document
+            .querySelectorAll(".mobile-links a")
+            .forEach((link) => {
+
+                link.addEventListener(
+                    "click",
+                    () => {
+
+                        mobileMenu.removeAttribute("open");
+
+                    }
+                );
+
+            });
+
+
+        const lightbox =
+            document.getElementById("galleryLightbox");
+
+
+        const lightboxImage =
+            document.getElementById("lightboxImage");
+
+
+        const lightboxCaption =
+            document.getElementById("lightboxCaption");
+
+
+        const closeButton =
+            document.querySelector(".lightbox-close");
+
+
+        const nextButton =
+            document.querySelector(".lightbox-next");
+
+
+        const prevButton =
+            document.querySelector(".lightbox-prev");
+
+
+        const lightboxItems =
+            galleryItems.flatMap(
+                (pair) => [
+
+                    {
+                        src: `img/${pair[0]}`,
+                        label: "PŘED"
+                    },
+
+                    {
+                        src: `img/${pair[1]}`,
+                        label: "PO"
+                    }
+
+                ]
+            );
+
+
+        let currentImage = 0;
+
+
+        function showImage(index) {
+
+            if (!lightboxItems.length) {
+                return;
+            }
+
+
+            currentImage =
+                (
+                    index +
+                    lightboxItems.length
+                )
+                %
+                lightboxItems.length;
+
+
+            const item =
+                lightboxItems[currentImage];
+
+
+            lightboxImage.src =
+                item.src;
+
+
+            lightboxImage.alt =
+                item.label;
+
+
+            lightboxCaption.textContent =
+                item.label;
+
+        }
+
+
+        function openLightbox(index) {
+
+            showImage(index);
+
+            lightbox.classList.add("active");
+
+            lightbox.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.style.overflow =
+                "hidden";
+
+        }
+
+
+        function closeLightbox() {
+
+            lightbox.classList.remove("active");
+
+            lightbox.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            document.body.style.overflow =
+                "";
+
+        }
+
+
+        function nextImage() {
+
+            showImage(
+                currentImage + 1
+            );
+
+        }
+
+
+        function prevImage() {
+
+            showImage(
+                currentImage - 1
+            );
+
+        }
+
+
+        const galleryPhotos =
+            document.querySelectorAll(".ba-photo");
+
+
+        galleryPhotos.forEach(
+            (photo, index) => {
+
+                photo.addEventListener(
+                    "click",
+                    () => {
+
+                        openLightbox(index);
+
+                    }
+                );
+
+
+                photo.addEventListener(
+                    "keydown",
+                    (event) => {
+
+                        if (
+                            event.key === "Enter" ||
+                            event.key === " "
+                        ) {
+
+                            event.preventDefault();
+
+                            openLightbox(index);
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+        closeButton.addEventListener(
+            "click",
+            closeLightbox
+        );
+
+
+        nextButton.addEventListener(
+            "click",
+            nextImage
+        );
+
+
+        prevButton.addEventListener(
+            "click",
+            prevImage
+        );
+
+
+        lightbox.addEventListener(
+            "click",
+            (event) => {
+
+                if (
+                    event.target === lightbox
+                ) {
+
+                    closeLightbox();
+
+                }
+
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (
+                    !lightbox.classList.contains(
+                        "active"
+                    )
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    closeLightbox();
+
+                }
+
+
+                if (
+                    event.key === "ArrowRight"
+                ) {
+
+                    nextImage();
+
+                }
+
+
+                if (
+                    event.key === "ArrowLeft"
+                ) {
+
+                    prevImage();
+
+                }
+
+            }
+        );
+
+
+        let touchStartX = 0;
+
+
+        lightbox.addEventListener(
+            "touchstart",
+            (event) => {
+
+                touchStartX =
+                    event.changedTouches[0]
+                        .screenX;
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+        lightbox.addEventListener(
+            "touchend",
+            (event) => {
+
+                const touchEndX =
+                    event.changedTouches[0]
+                        .screenX;
+
+
+                const difference =
+                    touchStartX -
+                    touchEndX;
+
+
+                if (
+                    Math.abs(difference) < 50
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    difference > 0
+                ) {
+
+                    nextImage();
+
+                } else {
+
+                    prevImage();
+
+                }
+
+            },
+            {
+                passive: true
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
+
